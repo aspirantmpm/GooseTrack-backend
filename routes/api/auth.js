@@ -20,6 +20,6 @@ router.get('/current', authenticate, ctrl.getCurrent);
 
 router.post('/logout', authenticate, ctrl.logout);
 
-// router.patch('/avatars', authenticate, upload.single('avatar'), ctrl.updateAvatar);
+router.patch('/upload', ctrl.updateAvatar);
 
 module.exports = router;
