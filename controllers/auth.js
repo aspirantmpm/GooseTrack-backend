@@ -10,9 +10,9 @@ const { User } = require('../models/user');
 
 const { ctrlWrapper, HttpError, sendEmail } = require('../helpers');
 
-const { SECRET_KEY, BASE_URL } = process.env;
+// const { SECRET_KEY, BASE_URL } = process.env;
 
-// const { SECRET_KEY } = process.env;
+const { SECRET_KEY } = process.env;
 
 const avatarDir = path.join(__dirname, '../', 'public', 'avatars');
 
