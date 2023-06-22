@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const authRouter = require('./routes/api/auth');
 
-const userProfileRouter = require('./routes/api/userProfile');
+const userProfileRouter = require('./routes/api/profile');
 
 const app = express();
 
