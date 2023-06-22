@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 const { handleMongooseError } = require('../helpers');
 
-const contactsSchema = new Schema({
+const userProfileSchema = new Schema({
   name: {
     type: String,
     required: [true, 'Set name for contact'],
@@ -29,9 +29,9 @@ const contactsSchema = new Schema({
   },
 });
 
-contactsSchema.post('save', handleMongooseError);
+userProfileSchema.post('save', handleMongooseError);
 
-const contactsAddSchema = Joi.object({
+const userProfileAddSchema = Joi.object({
   name: Joi.string().required().messages({
     'any.required': `missing required name field`,
   }),
@@ -48,8 +48,8 @@ const updateFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required(),
 });
 
-const schemas = { contactsAddSchema, updateFavoriteSchema };
+const schemas = { userProfileAddSchema, updateFavoriteSchema };
 
-const Contacts = model('contacts', contactsSchema);
+const UserProfile = model('userProfile', userProfileSchema);
 
-module.exports = { Contacts, schemas };
+module.exports = { UserProfile, schemas };

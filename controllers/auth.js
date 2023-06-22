@@ -10,7 +10,7 @@ const { User } = require('../models/user');
 
 const { ctrlWrapper, HttpError, sendEmail } = require('../helpers');
 
-const { SECRET_KEY } = process.env;
+const { SECRET_KEY, BASE_URL } = process.env;
 
 // const { SECRET_KEY } = process.env;
 
@@ -35,8 +35,8 @@ const register = async (req, res) => {
   const verifyEmail = {
     to: email,
     subject: 'Verify email',
-    // html: `<a target="_blank" href="https://${BASE_URL}/api/auth/veryfy/${verificationToken}">Click veryfy email</a>`,
-    html: `<a target="_blank" href="https://goosetrack-backend-2lsp.onrender.com/api/auth/verify/${verificationToken}">Click verify email</a>`,
+    html: `<a target="_blank" href="${BASE_URL}/api/auth/veryfy/${verificationToken}">Click veryfy email</a>`,
+    // html: `<a target="_blank" href="https://goosetrack-backend-2lsp.onrender.com/api/auth/verify/${verificationToken}">Click verify email</a>`,
   };
 
   await sendEmail(verifyEmail);
@@ -72,8 +72,8 @@ const resendVerifyEmail = async (req, res) => {
   const verifyEmail = {
     to: email,
     subject: 'Verify email',
-    // html: `<a target="_blank" href="https://${BASE_URL}/api/auth/veryfy/${user.verificationToken}">Click veryfy email</a>`,
-    html: `<a target="_blank" href="https://goosetrack-backend-2lsp.onrender.com/api/auth/verify/${user.verificationToken}">Click verify email</a>`,
+    html: `<a target="_blank" href="${BASE_URL}/api/auth/veryfy/${user.verificationToken}">Click veryfy email</a>`,
+    // html: `<a target="_blank" href="https://goosetrack-backend-2lsp.onrender.com/api/auth/verify/${user.verificationToken}">Click verify email</a>`,
   };
 
   await sendEmail(verifyEmail);

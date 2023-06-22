@@ -1,7 +1,7 @@
 const fs = require('fs/promises');
 const path = require('path');
 
-const { Contacts } = require('../models/contacts');
+const { Contacts } = require('../models/userProfile');
 
 const { HttpError, ctrlWrapper } = require('../helpers');
 
