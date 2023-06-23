@@ -10,7 +10,7 @@ const reviewsSchema = new Schema({
   },
   comment: {
     type: String,
-    required: [true, 'Set your name'],
+    required: [true, 'Set your comment'],
   },
   // phone: {
   //   type: String,
@@ -26,7 +26,7 @@ const reviewsSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: 'user',
-    required: true,
+    // required: true,
   },
 });
 
