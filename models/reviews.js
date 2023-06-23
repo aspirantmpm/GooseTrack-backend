@@ -10,7 +10,7 @@ const reviewsSchema = new Schema({
   },
   comment: {
     type: String,
-    required: [true, 'Set your name'],
+    required: [true, 'Leave your comment'],
   },
   // phone: {
   //   type: String,
