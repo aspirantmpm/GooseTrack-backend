@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
+const { format } = require('date-fns');
 
 const { handleMongooseError } = require('../helpers');
 
@@ -9,7 +10,7 @@ const dateRegexp = [
 ];
 const timeRegexp = [/^([0-2]\d):[0-5]\d$/, 'Invalid time format (e.g., 09:00)'];
 const now = new Date();
-const formatedDate = now.format('yyyy-mm-dd');
+const formattedDate = format(now, 'yyyy-MM-dd');
 
 const taskSchema = new Schema({
   title: {
@@ -45,7 +46,7 @@ const taskSchema = new Schema({
   date: {
     type: String,
     required: true,
-    default: formatedDate,
+    default: formattedDate,
     match: dateRegexp,
   },
   category: {
