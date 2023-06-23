@@ -67,9 +67,6 @@ taskSchema.post('save', handleMongooseError);
 
 const taskAddSchema = Joi.object({
   title: Joi.string().required(),
-  comment: Joi.string().required().messages({
-    'any.required': `missing required comment field`,
-  }),
   start: Joi.string().required().messages({
     'any.required': `missing required start field`,
   }),
