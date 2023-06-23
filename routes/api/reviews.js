@@ -36,12 +36,12 @@ router.put(
 //   ctrl.updateFavorite
 // );
 
-router.patch(
-  '/:id/favorite',
-  authenticate,
-  isValidId,
-  validateBody(schemas.reviewsAddSchema),
-  ctrl.updateById
-);
+// router.patch(
+//   '/:id/favorite',
+//   authenticate,
+//   isValidId,
+//   validateBody(schemas.reviewsAddSchema),
+//   ctrl.updateById
+// );
 
 module.exports = router;
