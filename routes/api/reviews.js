@@ -12,7 +12,7 @@ const { schemas } = require('../../models/reviews');
 
 router.get('/', authenticate, ctrl.getAll);
 
-router.get('/:id', authenticate, isValidId, ctrl.getAllOwn);
+router.get('/:_id', authenticate, isValidId, ctrl.getAllOwn);
 
 router.post('/', authenticate, validateBody(schemas.reviewsAddSchema), ctrl.add);
 
@@ -20,7 +20,7 @@ router.post('/', authenticate, validateBody(schemas.reviewsAddSchema), ctrl.add)
 
 // router.post('/upload', ctrl.getById);
 
-router.delete('/:id', authenticate, isValidId, ctrl.deleteById);
+router.delete('/:_id', authenticate, isValidId, ctrl.deleteById);
 
 router.patch(
   '/:_id',

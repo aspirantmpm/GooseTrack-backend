@@ -72,8 +72,8 @@ const updateById = async (req, res) => {
 // };
 
 const deleteById = async (req, res) => {
-  const { id } = req.params;
-  const result = await Reviews.findByIdAndRemove(id);
+  const { _id } = req.params;
+  const result = await Reviews.findByIdAndRemove(_id);
   if (!result) {
     throw HttpError(404, 'Not found');
   }
