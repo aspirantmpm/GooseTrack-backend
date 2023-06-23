@@ -22,8 +22,8 @@ router.post('/', authenticate, validateBody(schemas.reviewsAddSchema), ctrl.add)
 
 router.delete('/:id', authenticate, isValidId, ctrl.deleteById);
 
-router.put(
-  '/:id',
+router.patch(
+  '/:_id',
   authenticate,
   isValidId,
   validateBody(schemas.reviewsAddSchema),
