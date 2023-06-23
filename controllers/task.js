@@ -20,6 +20,7 @@ const getTaskPerMonth = async (req, res) => {
   const tasks = await Task.aggregate([
     {
       $addFields: {
+        convertedDate: { $toDate: '$date' },
         month: { $month: '$date' },
         day: { $dayOfMonth: '$date' },
         year: { $year: '$date' },
@@ -95,7 +96,7 @@ const deleteById = async (req, res) => {
 };
 
 module.exports = {
-//   getAll: ctrlWrapper(getAll),
+  //   getAll: ctrlWrapper(getAll),
   getTaskPerMonth: ctrlWrapper(getTaskPerMonth),
   // getById: ctrlWrapper(getById),
   addTask: ctrlWrapper(addTask),
