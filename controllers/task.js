@@ -21,9 +21,9 @@ const getTaskPerMonth = async (req, res) => {
     {
       $addFields: {
         convertedDate: { $toDate: '$date' },
-        month: { $month: '$date' },
-        day: { $dayOfMonth: '$date' },
-        year: { $year: '$date' },
+        month: { $month: '$convertedDate' },
+        day: { $dayOfMonth: '$convertedDate' },
+        year: { $year: '$convertedDate' },
       },
     },
     {
