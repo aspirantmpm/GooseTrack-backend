@@ -14,6 +14,8 @@ router.get('/', authenticate, ctrl.getAll);
 
 router.get('/:id', authenticate, isValidId, ctrl.getAllOwn);
 
+router.post('/', authenticate, validateBody(schemas.reviewsAddSchema), ctrl.add);
+
 // router.get('/:id', authenticate, isValidId, ctrl.getById);
 
 // router.post('/upload', ctrl.getById);
