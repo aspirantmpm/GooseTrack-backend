@@ -21,7 +21,7 @@ router.get('/:id', authenticate, isValidId, ctrl.getAllOwn);
 router.delete('/:id', authenticate, isValidId, ctrl.deleteById);
 
 router.put(
-  '/comment',
+  '/:id',
   authenticate,
   isValidId,
   validateBody(schemas.reviewsAddSchema),
