@@ -26,6 +26,12 @@ const getAllOwn = async (req, res) => {
   res.json(result);
 };
 
+const add = async (req, res) => {
+  const { _id: owner } = req.user;
+  const result = await Reviews.create({ ...req.body, owner });
+  res.status(201).json(result);
+};
+
 // const getById = async (req, res) => {
 //   const { id } = req.params;
 //   const result = await Reviews.findById(id);
@@ -78,7 +84,7 @@ module.exports = {
   getAll: ctrlWrapper(getAll),
   getAllOwn: ctrlWrapper(getAllOwn),
   // getById: ctrlWrapper(getById),
-  // add: ctrlWrapper(add),
+  add: ctrlWrapper(add),
   updateById: ctrlWrapper(updateById),
   // updateFavorite: ctrlWrapper(updateFavorite),
   deleteById: ctrlWrapper(deleteById),
