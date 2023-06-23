@@ -46,8 +46,8 @@ const getAllOwn = async (req, res) => {
 // };
 
 const updateById = async (req, res) => {
-  const { id } = req.params;
-  const result = await Reviews.findByIdAndUpdate(id, req.body, { new: true });
+  const { _id } = req.params;
+  const result = await Reviews.findByIdAndUpdate(_id, req.body, { new: true });
   if (!result) {
     throw HttpError(404, 'Not found');
   }
