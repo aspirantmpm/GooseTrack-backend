@@ -69,8 +69,9 @@ const addTask = async (req, res) => {
 // };
 
 const updateById = async (req, res) => {
-  const { _id } = req.params;
-  const result = await Task.findByIdAndUpdate(_id, req.body, { new: true });
+  const { id } = req.params;
+  const { _id: owner } = req.user;
+  const result = await Task.findByIdAndUpdate({ _id: id, owner }, req.body, { new: true });
   if (!result) {
     throw HttpError(404, 'Not found');
   }
@@ -87,12 +88,13 @@ const updateById = async (req, res) => {
 // };
 
 const deleteById = async (req, res) => {
-  const { _id } = req.params;
-  const result = await Task.findByIdAndRemove(_id);
+  const { id } = req.params;
+  const { _id: owner } = req.user;
+  const result = await Task.findByIdAndRemove({ _id: id, owner });
   if (!result) {
     throw HttpError(404, 'Not found');
   }
-  res.json({ message: 'contact deleted' });
+  res.json({ message: 'Task deleted' });
 };
 
 module.exports = {
