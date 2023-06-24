@@ -1,5 +1,6 @@
 const validateBody = require('./validateBody');
 const isValidId = require('./isValidId');
 const authenticate = require('./authenticate');
-const upload = require('./upload');
-module.exports = { validateBody, isValidId, authenticate, upload };
+const cloudinary = require('./cloudinary');
+const uploader = require('./multer');
+module.exports = { validateBody, isValidId, authenticate, cloudinary, uploader };
