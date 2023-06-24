@@ -1,11 +1,12 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const gravatar = require('gravatar');
-const cloudinary = require('cloudinary').v2;
+// const cloudinary = require('cloudinary').v2;
 // const path = require('path');
 // const fs = require('fs/promises');
 // const Jimp = require('jimp');
 const { nanoid } = require('nanoid');
+const { cloudinary } = require('../middlewares/index');
 
 const { User } = require('../models/user');
 
@@ -126,27 +127,44 @@ const logout = async (req, res) => {
   });
 };
 
-const updateAvatar = async (req, res) => {
-  const { _id } = req.user;
-  const { path: tmp, originalname } = req.file;
-  const filename = `${_id}_${originalname}`;
+const updateById = async (req, res) => {
+  const { _id } = req.params;
 
-  // Завантаження файлу на Cloudinary
-  const uploadedImage = await cloudinary.uploader.upload(tmp, {
-    public_id: `avatars/${filename}`,
-    overwrite: true,
-    transformation: [{ width: 250, height: 250, crop: 'fill' }],
-  });
+  if (req.file) {
+    // Якщо надіслано новий аватар, завантажуємо його на Cloudinary
+    const upload = await cloudinary.v2.uploader.upload(req.file.path);
+    req.body.avatarURL = upload.secure_url;
+  }
 
-  const avatarURL = uploadedImage.secure_url;
+  const result = await User.findByIdAndUpdate(_id, req.body, { new: true });
+  if (!result) {
+    throw HttpError(404, 'Not found');
+  }
 
-  // Оновлення URL аватару у базі даних або відповідній моделі користувача
-  await User.findByIdAndUpdate(_id, { avatarURL });
-
-  res.json({
-    avatarURL,
-  });
+  res.json(result);
 };
+
+// const updateAvatar = async (req, res) => {
+//   const { _id } = req.user;
+//   const { path: tmp, originalname } = req.file;
+//   const filename = `${_id}_${originalname}`;
+
+//   // Завантаження файлу на Cloudinary
+//   const uploadedImage = await cloudinary.uploader.upload(tmp, {
+//     public_id: `avatars/${filename}`,
+//     overwrite: true,
+//     transformation: [{ width: 250, height: 250, crop: 'fill' }],
+//   });
+
+//   const avatarURL = uploadedImage.secure_url;
+
+//   // Оновлення URL аватару у базі даних або відповідній моделі користувача
+//   await User.findByIdAndUpdate(_id, { avatarURL });
+
+//   res.json({
+//     avatarURL,
+//   });
+// };
 
 // const updateAvatar = async (req, res) => {
 //   const { _id } = req.user;
@@ -173,5 +191,5 @@ module.exports = {
   login: ctrlWrapper(login),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
-  updateAvatar: ctrlWrapper(updateAvatar),
+  updateById: ctrlWrapper(updateById),
 };
