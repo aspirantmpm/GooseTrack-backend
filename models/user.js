@@ -28,7 +28,7 @@ const userSchema = new Schema({
     required: [true, 'Set password for user'],
     minlength: 6,
   },
-  avatarURL: {
+  avatar: {
     type: String,
     default: '',
     // required: true,
@@ -77,7 +77,7 @@ const emailSchema = Joi.object({
 });
 
 const updateUserSchema = Joi.object({
-  avatarURL: Joi.string(),
+  avatar: Joi.string(),
     // .required(),
   name: Joi.string().required(),
   birthday: Joi.string().pattern(birthdayRegexp).required(),
