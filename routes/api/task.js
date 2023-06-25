@@ -12,9 +12,9 @@ router.get('/:_id', authenticate, isValidId, ctrl.getTaskPerMonth);
 
 router.post('/', authenticate, validateBody(schemas.taskAddSchema), ctrl.addTask);
 
-// router.get('/:id', authenticate, isValidId, ctrl.getById);
+router.get('/:id', authenticate, isValidId, ctrl.getById);
 
-// router.post('/upload', ctrl.getById);
+router.post('/upload', ctrl.getById);
 
 router.delete('/:_id', authenticate, isValidId, ctrl.deleteById);
 
