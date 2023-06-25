@@ -4,6 +4,8 @@ const app = require('./app');
 
 const { DB_HOST, PORT = 3001, BASE_URL } = process.env;
 
+mongoose.set("strictQuery", true);
+
 mongoose
   .connect(DB_HOST)
   .then(() => {

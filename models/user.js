@@ -7,6 +7,7 @@ const emailRegexp = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[
 const birthdayRegexp = /^((0[1-9]|[12]\d|3[01])\/(0[1-9]|1[012])\/\d{4})$/;
 const phoneRegexp = /^38 \(\d{3}\) \d{3} \d{2} \d{2}$/;
 
+
 const userSchema = new Schema({
   name: {
     type: String,
@@ -14,8 +15,8 @@ const userSchema = new Schema({
   },
   birthday: {
     type: String,
-    required: true,
     match: birthdayRegexp,
+    defaultValue: '',
   },
   email: {
     type: String,
@@ -62,9 +63,9 @@ const userSchema = new Schema({
 userSchema.post('save', handleMongooseError);
 
 const registerSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(6).required(),
+    name: Joi.string().required(),
+    password: Joi.string().min(6).required(),
+    email: Joi.string().pattern(emailRegexp).required(),
 });
 
 const loginSchema = Joi.object({
