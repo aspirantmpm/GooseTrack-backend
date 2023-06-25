@@ -6,13 +6,13 @@ const router = express.Router();
 
 const ctrl = require('../../controllers/reviews');
 
-const { validateBody, isValidId } = require('../../middlewares');
+const { validateBody, isValidId, authenticate,} = require('../../middlewares');
 
 const { schemas } = require('../../models/reviews');
 
-router.get('/:_id', isValidId, ctrl.getAllOwn);
+router.get('/:_id',authenticate, isValidId, ctrl.getAllOwn);
 
-router.post('/', validateBody(schemas.reviewsAddSchema), ctrl.addReview);
+router.post('/',authenticate, validateBody(schemas.reviewsAddSchema), ctrl.addReview);
 
 // router.get('/:id', authenticate, isValidId, ctrl.getById);
 
@@ -22,6 +22,7 @@ router.delete('/:_id',  isValidId, ctrl.deleteById);
 
 router.patch(
   '/:_id',
+  authenticate,
   isValidId,
   validateBody(schemas.reviewsAddSchema),
   ctrl.updateById
