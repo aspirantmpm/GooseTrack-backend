@@ -3,6 +3,8 @@ const Joi = require('joi');
 
 const { handleMongooseError } = require('../helpers');
 
+
+
 const reviewsSchema = new Schema({
   name: {
     type: String,
@@ -11,6 +13,10 @@ const reviewsSchema = new Schema({
   comment: {
     type: String,
     required: [true, 'Set your comment'],
+  },
+  reting: {
+    type: Number,
+    default: 0
   },
   // phone: {
   //   type: String,
@@ -39,6 +45,7 @@ const reviewsAddSchema = Joi.object({
   comment: Joi.string().required().messages({
     'any.required': `missing required comment field`,
   }),
+  reting: Joi.number().valid(0, 1, 2, 3, 4, 5),
   // phone: Joi.string().required().messages({
   //   'any.required': `missing required phone field`,
   // }),
