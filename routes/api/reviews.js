@@ -6,25 +6,22 @@ const router = express.Router();
 
 const ctrl = require('../../controllers/reviews');
 
-const { validateBody, isValidId, authenticate } = require('../../middlewares');
+const { validateBody, isValidId } = require('../../middlewares');
 
 const { schemas } = require('../../models/reviews');
 
-router.get('/', authenticate, ctrl.getAll);
+router.get('/:_id', isValidId, ctrl.getAllOwn);
 
-router.get('/:_id', authenticate, isValidId, ctrl.getAllOwn);
-
-router.post('/', authenticate, validateBody(schemas.reviewsAddSchema), ctrl.addReview);
+router.post('/', validateBody(schemas.reviewsAddSchema), ctrl.addReview);
 
 // router.get('/:id', authenticate, isValidId, ctrl.getById);
 
 // router.post('/upload', ctrl.getById);
 
-router.delete('/:_id', authenticate, isValidId, ctrl.deleteById);
+router.delete('/:_id',  isValidId, ctrl.deleteById);
 
 router.patch(
   '/:_id',
-  authenticate,
   isValidId,
   validateBody(schemas.reviewsAddSchema),
   ctrl.updateById
