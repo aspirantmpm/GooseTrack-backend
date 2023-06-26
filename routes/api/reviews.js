@@ -10,6 +10,8 @@ const { validateBody, isValidId, authenticate,} = require('../../middlewares');
 
 const { schemas } = require('../../models/reviews');
 
+router.get('/', authenticate, ctrl.getAll);
+
 router.get('/:_id',authenticate, isValidId, ctrl.getAllOwn);
 
 router.post('/',authenticate, validateBody(schemas.reviewsAddSchema), ctrl.addReview);
