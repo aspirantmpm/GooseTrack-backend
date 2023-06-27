@@ -39,8 +39,8 @@ const register = async (req, res) => {
     verificationToken,
   });
 
-  const localHost = ` http://localhost:3000/api/auth/verify/${verificationToken}`;
-  const verifyPage = `${PROJECT_URL}/api/auth/verify/${verificationToken}`;
+  const localHost = ` http://localhost:3000/verify/${verificationToken}`;
+  const verifyPage = `${PROJECT_URL}/verify/${verificationToken}`;
 
   const verifyEmail = {
     to: email,
