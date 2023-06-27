@@ -1,37 +1,26 @@
-const express = require("express");
-// const {uploader, cloudinary} = require('../../middlewares/index');
-const ctrl = require("../../controllers/auth");
-
-const { schemas } = require("../../models/user");
-
-const { validateBody, authenticate } = require("../../middlewares");
-
+const express = require('express');
 const router = express.Router();
 
-router.post("/register", validateBody(schemas.registerSchema), ctrl.register);
+const ctrl = require('../../controllers/auth');
+const { validateBody } = require('../../middlewares');
+const { schemas } = require('../../models/user');
 
-router.get("/verify/:verificationToken", ctrl.verifyEmail);
+router.post('/register', validateBody(schemas.registerSchema), ctrl.register);
 
-router.post(
-  "/verify",
-  validateBody(schemas.emailSchema),
-  ctrl.resendVerifyEmail
-);
+//router.get('/verify/:verificationToken', ctrl.verifyEmail);
+
+//router.post('/verify', validateBody(schemas.emailSchema), ctrl.resendVerifyEmail);
 
 router.post("/login", validateBody(schemas.loginSchema), ctrl.login);
 
-router.get("/current", authenticate, ctrl.getCurrent);
+router.get('/current', ctrl.current);
 
-router.post("/logout", authenticate, ctrl.logout);
+router.post('/logout', ctrl.logout);
 
-router.patch(
-  "/updateUser",
-  authenticate,
-  validateBody(schemas.updateUserSchema),
-  ctrl.updateById
-);
+router.patch('/updateUser', validateBody(schemas.updateUserSchema), ctrl.update);
 
-// router.patch('/upload', upload.single('avatar'), authenticate, ctrl.updateAvatar);
+
+// router.patch('/upload', upload.single('avatar'), ctrl.updateAvatar);
 
 // router.post('/upload', uploader.single('avatar'), async (req, res) => {
 //   const upload = await cloudinary.v2.uploader.upload(req.file.path);
@@ -42,3 +31,4 @@ router.patch(
 // });
 
 module.exports = router;
+
