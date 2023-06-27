@@ -106,6 +106,11 @@ const login = async (req, res) => {
 
   const payload = {
     id: user._id,
+    avatarURL: user.avatarURL,
+    name: user.name,
+    birthday: user.birthday,
+    phone: user.phone,
+    skype: user.skype,
   };
 
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
@@ -114,6 +119,8 @@ const login = async (req, res) => {
   res.json({
     token,
     payload,
+    // avatarURL,
+
   });
 };
 
