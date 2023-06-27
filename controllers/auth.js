@@ -106,6 +106,7 @@ const login = async (req, res) => {
 
   const payload = {
     id: user._id,
+    email: user.email,
     avatarURL: user.avatarURL,
     name: user.name,
     birthday: user.birthday,
@@ -119,8 +120,6 @@ const login = async (req, res) => {
   res.json({
     token,
     payload,
-    // avatarURL,
-
   });
 };
 
