@@ -84,6 +84,7 @@ const resendVerifyEmail = async (req, res) => {
   if (user.verify) {
     throw HttpError(400, "Verification has already been passed");
   }
+  const verificationToken = nanoid();
 
   const localHost = ` http://localhost:3000/api/auth/verify/${verificationToken}`;
   const verifyPage = `${BASE_URL}/api/auth/verify/${verificationToken}`;
