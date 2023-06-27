@@ -11,13 +11,14 @@ router.post('/register', validateBody(schemas.registerSchema), ctrl.register);
 
 //router.post('/verify', validateBody(schemas.emailSchema), ctrl.resendVerifyEmail);
 
-router.post('/login', validateBody(schemas.loginSchema), ctrl.login);
+router.post("/login", validateBody(schemas.loginSchema), ctrl.login);
 
 router.get('/current', ctrl.current);
 
 router.post('/logout', ctrl.logout);
 
 router.patch('/updateUser', validateBody(schemas.updateUserSchema), ctrl.update);
+
 
 // router.patch('/upload', upload.single('avatar'), ctrl.updateAvatar);
 
