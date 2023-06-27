@@ -19,6 +19,10 @@ const { SECRET_KEY } = process.env;
 // const avatarDir = path.join(__dirname, '../', 'public', 'avatars');
 
 const register = async (req, res) => {
+  const protocol = req.protocol; // Define the protocol (HTTP or HTTPS)
+  const host = req.get("host"); // get host
+  const fullUrl = `${protocol}://${host}`;
+
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user) {
@@ -34,11 +38,17 @@ const register = async (req, res) => {
     avatarURL: newAvatarUrl,
     verificationToken,
   });
+
+  const localHost = ` http://localhost:3000/api/auth/verify/${verificationToken}`;
+  const verifyPage = `${BASE_URL}/api/auth/verify/${verificationToken}`;
+
   const verifyEmail = {
     to: email,
     subject: "Verify email",
     // html: `<a target="_blank" href="${BASE_URL}/api/auth/veryfy/${verificationToken}">Click veryfy email</a>`,
-    html: `<a target="_blank" href="https://goosetrack-backend-2lsp.onrender.com/api/auth/verify/${verificationToken}">Click verify email</a>`,
+    html: `<a target="_blank" href="${
+      fullUrl === "http://localhost:3000" ? localHost : verifyPage
+    }">Click verify email</a>`,
   };
 
   await sendEmail(verifyEmail);
@@ -74,11 +84,17 @@ const resendVerifyEmail = async (req, res) => {
   if (user.verify) {
     throw HttpError(400, "Verification has already been passed");
   }
+
+  const localHost = ` http://localhost:3000/api/auth/verify/${verificationToken}`;
+  const verifyPage = `${BASE_URL}/api/auth/verify/${verificationToken}`;
+
   const verifyEmail = {
     to: email,
     subject: "Verify email",
     // html: `<a target="_blank" href="${BASE_URL}/api/auth/veryfy/${user.verificationToken}">Click veryfy email</a>`,
-    html: `<a target="_blank" href="https://goosetrack-backend-2lsp.onrender.com/api/auth/verify/${user.verificationToken}">Click verify email</a>`,
+    html: `<a target="_blank" href="${
+      fullUrl === "http://localhost:3000" ? localHost : verifyPage
+    }">Click verify email</a>`,
   };
 
   await sendEmail(verifyEmail);
