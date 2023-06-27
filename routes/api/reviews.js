@@ -1,24 +1,15 @@
 const express = require('express');
-// const cloudinary = require('../../cloudinary/cloudinary');
-// const uploader = require('../../cloudinary/multer');
-
 const router = express.Router();
 
 const ctrl = require('../../controllers/reviews');
-
-const { validateBody, isValidId, authenticate,} = require('../../middlewares');
-
+const { validateBody, isValidId, authenticate } = require('../../middlewares');
 const { schemas } = require('../../models/reviews');
 
-router.get('/:_id',authenticate, isValidId, ctrl.getAllOwn);
+router.get('/', ctrl.getAll);
 
-router.post('/',authenticate, validateBody(schemas.reviewsAddSchema), ctrl.addReview);
+router.get('/:_id', authenticate, isValidId, ctrl.getAllOwn);
 
-// router.get('/:id', authenticate, isValidId, ctrl.getById);
-
-// router.post('/upload', ctrl.getById);
-
-router.delete('/:_id',  isValidId, ctrl.deleteById);
+router.post('/', authenticate, validateBody(schemas.reviewsAddSchema), ctrl.addReview);
 
 router.patch(
   '/:_id',
@@ -28,11 +19,17 @@ router.patch(
   ctrl.updateById
 );
 
+router.delete('/:_id', isValidId, ctrl.deleteById);
+
+// router.get('/:id', authenticate, isValidId, ctrl.getById);
+
+// router.post('/upload', ctrl.getById);
+
 // router.patch(
 //   '/:id/favorite',
 //   authenticate,
 //   isValidId,
-//   validateBody(schemas.updateFavoriteShema),
+//   validateBody(schemas.updateFavoriteSchema),
 //   ctrl.updateFavorite
 // );
 
