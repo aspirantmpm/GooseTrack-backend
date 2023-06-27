@@ -1,26 +1,35 @@
-const express = require('express');
+const express = require("express");
 // const {uploader, cloudinary} = require('../../middlewares/index');
-const ctrl = require('../../controllers/auth');
+const ctrl = require("../../controllers/auth");
 
-const { schemas } = require('../../models/user');
+const { schemas } = require("../../models/user");
 
-const { validateBody, authenticate } = require('../../middlewares');
+const { validateBody, authenticate } = require("../../middlewares");
 
 const router = express.Router();
 
-router.post('/register', validateBody(schemas.registerSchema), ctrl.register);
+router.post("/register", validateBody(schemas.registerSchema), ctrl.register);
 
-router.get('/verify/:verificationToken', ctrl.verifyEmail);
+router.get("/verify/:verificationToken", ctrl.verifyEmail);
 
-router.post('/verify', validateBody(schemas.emailSchema), ctrl.resendVerifyEmail);
+router.post(
+  "/verify",
+  validateBody(schemas.emailSchema),
+  ctrl.resendVerifyEmail
+);
 
-router.post('/login', validateBody(schemas.loginSchema), ctrl.login);
+router.post("/login", validateBody(schemas.loginSchema), ctrl.login);
 
-router.get('/current', authenticate, ctrl.getCurrent);
+router.get("/current", authenticate, ctrl.getCurrent);
 
-router.post('/logout', authenticate, ctrl.logout);
+router.post("/logout", authenticate, ctrl.logout);
 
-router.patch('/updateUser', authenticate, validateBody(schemas.updateUserSchema), ctrl.updateById);
+router.patch(
+  "/updateUser",
+  authenticate,
+  validateBody(schemas.updateUserSchema),
+  ctrl.updateById
+);
 
 // router.patch('/upload', upload.single('avatar'), authenticate, ctrl.updateAvatar);
 
