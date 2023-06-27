@@ -1,4 +1,5 @@
 const express = require('express');
+const { validateBody } = require('../../middlewares');
 // const {uploader, cloudinary} = require('../../middlewares/index');
 const ctrl = require('../../controllers/auth');
 

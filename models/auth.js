@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Date } = require('mongoose');
 const Joi = require('joi');
 
 const { handleMongooseError } = require('../helpers');
@@ -13,11 +13,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  birthday: {
-    type: String,
-    match: birthdayRegexp,
-    defaultValue: '',
-  },
+ birthday: {
+  type: Date,
+  match: birthdayRegexp,
+  default: null,
+},
   email: {
     type: String,
     match: emailRegexp,
