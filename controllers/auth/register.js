@@ -18,14 +18,7 @@ const register = async (req, res) => {
   const newAvatarUrl = gravatar.url(email, { default: "robohash" });
   const hashPassword = await bcrypt.hash(password, 10);
 
-  const protocol = req.protocol; // Define the protocol (HTTP or HTTPS)
-  const host = req.get("host"); // get host
-  const fullUrl = `${protocol}://${host}`;
-
   const verificationToken = nanoid();
-
-  const localHost = ` http://localhost:3000/verify/${verificationToken}`;
-  const verifyPage = `${PROJECT_URL}/verify/${verificationToken}`;
 
   const newUser = await User.create({
     ...req.body,
