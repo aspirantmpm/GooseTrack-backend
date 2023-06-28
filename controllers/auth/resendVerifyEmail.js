@@ -4,10 +4,6 @@ const { ctrlWrapper, HttpError, sendEmail } = require("../../helpers");
 const resendVerifyEmail = async (req, res) => {
   const { email } = req.body;
 
-  const protocol = req.protocol; // Define the protocol (HTTP or HTTPS)
-  const host = req.get("host"); // get host
-  const fullUrl = `${protocol}://${host}`;
-
   const user = await User.findOne({ email });
   if (!user) {
     throw HttpError(404, "User not found");
