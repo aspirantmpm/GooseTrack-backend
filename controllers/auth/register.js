@@ -3,6 +3,8 @@ const gravatar = require("gravatar");
 const { nanoid } = require("nanoid");
 const { User } = require("../../models/user");
 const { ctrlWrapper, HttpError, sendEmail } = require("../../helpers");
+const { BASE_URL } = process.env;
+
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -28,7 +30,7 @@ const register = async (req, res) => {
   });
 
   const localHost = ` http://localhost:3000/verify/${verificationToken}`;
-  const verifyPage = `${PROJECT_URL}/verify/${verificationToken}`;
+  const verifyPage = `${BASE_URL}/verify/${verificationToken}`;
 
   const verifyEmail = {
     to: email,
