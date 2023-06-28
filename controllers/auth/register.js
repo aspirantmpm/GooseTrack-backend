@@ -6,6 +6,11 @@ const { ctrlWrapper, HttpError, sendEmail } = require("../../helpers");
 
 const register = async (req, res) => {
   const { email, password } = req.body;
+
+  const protocol = req.protocol; // Define the protocol (HTTP or HTTPS)
+  const host = req.get("host"); // get host
+  const fullUrl = `${protocol}://${host}`;
+
   const user = await User.findOne({ email });
   if (user) {
     throw HttpError(409, "Email already in use");
@@ -18,6 +23,9 @@ const register = async (req, res) => {
   const fullUrl = `${protocol}://${host}`;
 
   const verificationToken = nanoid();
+
+  const localHost = ` http://localhost:3000/verify/${verificationToken}`;
+  const verifyPage = `${PROJECT_URL}/verify/${verificationToken}`;
 
   const newUser = await User.create({
     ...req.body,

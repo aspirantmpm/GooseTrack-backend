@@ -33,7 +33,7 @@ const updateUser = async (req, res, next) => {
   });
 
   if (!result) {
-    throw createError(404, "User not found");
+    throw HttpError(404, "User not found");
   }
 
   res.json({
