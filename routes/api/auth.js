@@ -28,9 +28,15 @@ router.post("/logout", authenticate, ctrl.logout);
 //   "/updateUser",
 //   authenticate,
 //   validateBody(schemas.updateUserSchema),
-//   ctrl.updateById
+//   ctrl.updateUser
 // );
 
+router.patch(
+  "/updateUser",
+  authenticate,
+  validateBody(schemas.updateUserSchema),
+  ctrl.updateUser
+);
 // router.patch('/upload', upload.single('avatar'), authenticate, ctrl.updateAvatar);
 
 // router.post('/upload', uploader.single('avatar'), async (req, res) => {
