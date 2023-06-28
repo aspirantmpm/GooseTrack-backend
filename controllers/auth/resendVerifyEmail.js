@@ -3,6 +3,11 @@ const { ctrlWrapper, HttpError, sendEmail } = require("../../helpers");
 
 const resendVerifyEmail = async (req, res) => {
   const { email } = req.body;
+
+  const protocol = req.protocol; // Define the protocol (HTTP or HTTPS)
+  const host = req.get("host"); // get host
+  const fullUrl = `${protocol}://${host}`;
+
   const user = await User.findOne({ email });
   if (!user) {
     throw HttpError(404, "User not found");
@@ -10,6 +15,10 @@ const resendVerifyEmail = async (req, res) => {
   if (user.verify) {
     throw HttpError(400, "Verification has already been passed");
   }
+  const protocol = req.protocol; // Define the protocol (HTTP or HTTPS)
+  const host = req.get("host"); // get host
+  const fullUrl = `${protocol}://${host}`;
+
   const verificationToken = nanoid();
 
   const localHost = ` http://localhost:3000/verify/${verificationToken}`;
@@ -30,4 +39,4 @@ const resendVerifyEmail = async (req, res) => {
   });
 };
 
-module.exports = ctrlWrapper(resendVerifyEmail);
+module.exports = { resendVerifyEmail: ctrlWrapper(resendVerifyEmail) };

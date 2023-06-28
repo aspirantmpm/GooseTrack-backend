@@ -1,18 +1,31 @@
-const bcrypt = require('bcrypt');
-const gravatar = require('gravatar');
-const { nanoid } = require('nanoid');
-const { User } = require('../../models/user');
-const { ctrlWrapper, HttpError, sendEmail } = require('../../helpers');
+const bcrypt = require("bcrypt");
+const gravatar = require("gravatar");
+const { nanoid } = require("nanoid");
+const { User } = require("../../models/user");
+const { ctrlWrapper, HttpError, sendEmail } = require("../../helpers");
 
 const register = async (req, res) => {
   const { email, password } = req.body;
+
+  const protocol = req.protocol; // Define the protocol (HTTP or HTTPS)
+  const host = req.get("host"); // get host
+  const fullUrl = `${protocol}://${host}`;
+
   const user = await User.findOne({ email });
   if (user) {
-    throw HttpError(409, 'Email already in use');
+    throw HttpError(409, "Email already in use");
   }
-  const newAvatarUrl = gravatar.url(email, { default: 'robohash' });
+  const newAvatarUrl = gravatar.url(email, { default: "robohash" });
   const hashPassword = await bcrypt.hash(password, 10);
+
+  const protocol = req.protocol; // Define the protocol (HTTP or HTTPS)
+  const host = req.get("host"); // get host
+  const fullUrl = `${protocol}://${host}`;
+
   const verificationToken = nanoid();
+
+  const localHost = ` http://localhost:3000/verify/${verificationToken}`;
+  const verifyPage = `${PROJECT_URL}/verify/${verificationToken}`;
 
   const newUser = await User.create({
     ...req.body,
@@ -20,10 +33,16 @@ const register = async (req, res) => {
     avatarURL: newAvatarUrl,
     verificationToken,
   });
+
+  const localHost = ` http://localhost:3000/verify/${verificationToken}`;
+  const verifyPage = `${PROJECT_URL}/verify/${verificationToken}`;
+
   const verifyEmail = {
     to: email,
-    subject: 'Verify email',
-    html: `<a target="_blank" href="https://goosetrack-backend-2lsp.onrender.com/api/auth/verify/${verificationToken}">Click verify email</a>`,
+    subject: "Verify email",
+    html: `<a target="_blank" href="${
+      fullUrl === "http://localhost:3000" ? localHost : verifyPage
+    }">Click verify email</a>`,
   };
 
   await sendEmail(verifyEmail);
@@ -35,4 +54,4 @@ const register = async (req, res) => {
   });
 };
 
-module.exports = ctrlWrapper(register);
+module.exports = { register: ctrlWrapper(register) };
