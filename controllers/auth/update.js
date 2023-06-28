@@ -1,6 +1,7 @@
 const { ctrlWrapper, HttpError } = require("../../helpers");
 const { User } = require("../../models/user");
 const { userDataValidator } = require("../../middlewares/userValidation");
+const cloudinary = require("cloudinary").v2;
 
 const updateUser = async (req, res, next) => {
   const { _id } = req.params;
