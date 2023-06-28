@@ -1,6 +1,6 @@
-const { ctrlWrapper, HttpError } = require("../../helpers");
-const { User } = require("../../models/user");
+// const { ctrlWrapper, HttpError } = require("../../helpers");
+// const { User } = require("../../models/user");
 
-const patchUser = () => {};
+// const patchUser = () => {};
 
-module.exports = { patchUser: ctrlWrapper(patchUser) };
+// module.exports = { patchUser: ctrlWrapper(patchUser) };

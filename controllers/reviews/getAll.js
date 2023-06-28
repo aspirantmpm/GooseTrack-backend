@@ -1,5 +1,7 @@
 const { Reviews } = require('../../models/reviews');
-const { HttpError, ctrlWrapper } = require('../../helpers');
+const {
+  // HttpError,
+  ctrlWrapper } = require('../../helpers');
 
 const getAll = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
