@@ -4,6 +4,7 @@ const { PROJECT_URL } = process.env;
 const { nanoid } = require("nanoid");
 const { User } = require("../../models/user");
 const { ctrlWrapper, HttpError, sendEmail } = require("../../helpers");
+// const { BASE_URL } = process.env;
 
 const register = async (req, res) => {
   const { email, password } = req.body;
