@@ -16,4 +16,4 @@ const verifyEmail = async (req, res) => {
   });
 };
 
-module.exports = ctrlWrapper(verifyEmail);
+module.exports = { verifyEmail: ctrlWrapper(verifyEmail) };
