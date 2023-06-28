@@ -1,10 +1,10 @@
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
+const { PROJECT_URL } = process.env;
 const { nanoid } = require("nanoid");
 const { User } = require("../../models/user");
 const { ctrlWrapper, HttpError, sendEmail } = require("../../helpers");
 // const { BASE_URL } = process.env;
-
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -29,14 +29,16 @@ const register = async (req, res) => {
     verificationToken,
   });
 
-  const localHost = ` http://localhost:3000/verify/${verificationToken}`;
-  const verifyPage = `https://goosetrack-backend-2lsp.onrender.com/verify/${verificationToken}`;
+  const localHost = ` https://goosetrack-backend-2lsp.onrender.com/api/auth/verify/${verificationToken}`;
+  const verifyPage = `${PROJECT_URL}/verify/${verificationToken}`;
 
   const verifyEmail = {
     to: email,
     subject: "Verify email",
     html: `<a target="_blank" href="${
-      fullUrl === "http://localhost:3000" ? localHost : verifyPage
+      fullUrl === "http://localhost:3000" || fullUrl === "http://localhost:3001"
+        ? localHost
+        : verifyPage
     }">Click verify email</a>`,
   };
 
