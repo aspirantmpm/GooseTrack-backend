@@ -5,6 +5,7 @@ const cloudinary = require("cloudinary").v2;
 
 const updateUser = async (req, res, next) => {
   const { _id } = req.params;
+  console.log("_id :", _id);
   const { name, email, password } = req.body;
 
   const { error } = userDataValidator(req.body);
