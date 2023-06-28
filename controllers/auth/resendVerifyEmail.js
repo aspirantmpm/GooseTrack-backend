@@ -1,7 +1,7 @@
 const { User } = require("../../models/user");
 const { ctrlWrapper, HttpError, sendEmail } = require("../../helpers");
 const { nanoid } = require("nanoid");
-// const { BASE_URL } = process.env;
+const { BASE_URL } = process.env;
 
 const resendVerifyEmail = async (req, res) => {
   const { email } = req.body;
@@ -20,7 +20,7 @@ const resendVerifyEmail = async (req, res) => {
   const verificationToken = nanoid();
 
   const localHost = ` https://goosetrack-backend-2lsp.onrender.com/api/auth/verify/${verificationToken}`;
-  const verifyPage = `${PROJECT_URL}/verify/${verificationToken}`;
+  const verifyPage = `${BASE_URL}/verify/${verificationToken}`;
 
   const verifyEmail = {
     to: email,
