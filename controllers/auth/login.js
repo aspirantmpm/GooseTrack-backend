@@ -25,15 +25,21 @@ const login = async (req, res) => {
   };
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
 
-  const findByIdAndUpdateOptions = {
-    select: "id email name phone birthday skype avatarURL",
-  };
-  const userData = await User.findByIdAndUpdate(
+  await User.findByIdAndUpdate(
     user._id,
-    { token },
-    findByIdAndUpdateOptions
+    { token }
   );
 
+  const userData = {
+    id: user._id,
+    email: user.email,
+    name: user.name,
+    phone: user.phone,
+    birthday: user.birthday,
+    skype: user.skype,
+    avatarURL: user.avatarURL,
+  };
+  
   res.json({
     token,
     user: userData,
