@@ -30,4 +30,4 @@ const resendVerifyEmail = async (req, res) => {
   });
 };
 
-module.exports = ctrlWrapper(resendVerifyEmail);
+module.exports = { resendVerifyEmail: ctrlWrapper(resendVerifyEmail) };
