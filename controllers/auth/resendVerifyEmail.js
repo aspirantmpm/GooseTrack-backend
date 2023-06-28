@@ -17,14 +17,14 @@ const resendVerifyEmail = async (req, res) => {
 
   const verificationToken = nanoid();
 
-  const localHost = ` http://localhost:3000/verify/${verificationToken}`;
+  const localHost = ` https://goosetrack-backend-2lsp.onrender.com/api/auth/verify/${verificationToken}`;
   const verifyPage = `${PROJECT_URL}/verify/${verificationToken}`;
 
   const verifyEmail = {
     to: email,
     subject: "Verify email",
     html: `<a target="_blank" href="${
-      fullUrl === "http://localhost:3000" ? localHost : verifyPage
+      fullUrl === "http://localhost:3001" ? localHost : verifyPage
     }">Click verify email</a>`,
   };
 
