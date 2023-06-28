@@ -1,6 +1,7 @@
 const { ctrlWrapper, HttpError } = require('../../helpers');
 const { User } = require('../../models/user');
 const { userDataValidator } = require('../../middlewares/userValidation');
+const cloudinary = require('cloudinary');
 
 const updateUser = async (req, res, next) => {
     const { _id } = req.params;
@@ -32,7 +33,7 @@ const updateUser = async (req, res, next) => {
     });
 
     if (!result) {
-      throw createError(404, 'User not found');
+      throw HttpError(404, 'User not found');
     }
 
     res.json({
