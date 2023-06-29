@@ -11,7 +11,7 @@ const {
 // };
 
 const getAll = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 50 } = req.query;
   const skip = (page - 1) * limit;
 
   try {
