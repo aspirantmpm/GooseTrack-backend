@@ -3,9 +3,13 @@ const { HttpError } = require("../helpers");
 const validateBody = (schema) => {
   return (req, res, next) => {
     const { body, file } = req;
-    const fileName = { avatarURL: file.originalname };
+    let fileName = null;
+
+    if (file) fileName = { avatarURL: file.originalname };
+
     const validateData = { ...body, ...fileName };
-    const { error } = schema.validate(validateData);
+
+    const { error } = schema.validate(file ? validateData : req.body);
     if (error) {
       next(HttpError(400, error.message));
     }

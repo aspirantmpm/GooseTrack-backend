@@ -81,7 +81,6 @@ const updateUserSchema = Joi.object().keys({
   avatarURL: Joi.string().required(),
   name: Joi.string().required(),
   birthday: Joi.string().pattern(birthdayRegexp).required(),
-  email: Joi.string().pattern(emailRegexp).required(),
   phone: Joi.string().pattern(phoneRegexp).required(),
   skype: Joi.string().required(),
 });
