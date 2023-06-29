@@ -3,32 +3,15 @@ const Joi = require('joi');
 
 const { handleMongooseError } = require('../helpers');
 
-
-
 const reviewsSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, 'Set your name'],
-  },
   comment: {
     type: String,
     required: [true, 'Set your comment'],
   },
   reting: {
     type: Number,
-    default: 0
+    default: 0,
   },
-  // phone: {
-  //   type: String,
-  // },
-  // favorite: {
-  //   type: Boolean,
-  //   default: false,
-  // },
-  // avatar: {
-  //   type: String,
-  //   required: true,
-  // },
   owner: {
     type: Schema.Types.ObjectId,
     ref: 'user',
@@ -39,26 +22,14 @@ const reviewsSchema = new Schema({
 reviewsSchema.post('save', handleMongooseError);
 
 const reviewsAddSchema = Joi.object({
-  name: Joi.string().required().messages({
-    'any.required': `missing required name field`,
-  }),
   comment: Joi.string().required().messages({
     'any.required': `missing required comment field`,
   }),
-  reting: Joi.number().valid(0, 1, 2, 3, 4, 5),
-  // phone: Joi.string().required().messages({
-  //   'any.required': `missing required phone field`,
-  // }),
-  // favorite: Joi.boolean(),
+  reting: Joi.number().valid(0, 1, 2, 3, 4, 5),  
 });
 
-// const updateFavoriteSchema = Joi.object({
-//   favorite: Joi.boolean().required(),
-// });
-
 const schemas = {
-  reviewsAddSchema,
-  // updateFavoriteSchema
+  reviewsAddSchema,  
 };
 
 const Reviews = model('reviews', reviewsSchema);
