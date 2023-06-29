@@ -1,5 +1,7 @@
 const express = require("express");
-const { uploader, cloudinary } = require("../../middlewares/index");
+const { uploader
+  // , cloudinary
+} = require("../../middlewares/index");
 const ctrl = require("../../controllers/auth");
 
 const { schemas } = require("../../models/user");
