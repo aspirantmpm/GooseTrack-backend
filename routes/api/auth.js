@@ -1,5 +1,5 @@
 const express = require("express");
-// const {uploader, cloudinary} = require('../../middlewares/index');
+const { uploader, cloudinary } = require("../../middlewares/index");
 const ctrl = require("../../controllers/auth");
 
 const { schemas } = require("../../models/user");
@@ -34,6 +34,7 @@ router.post("/logout", authenticate, ctrl.logout);
 router.patch(
   "/updateUser",
   authenticate,
+  uploader.single("avatarURL"),
   validateBody(schemas.updateUserSchema),
   ctrl.updateUser
 );
