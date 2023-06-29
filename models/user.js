@@ -78,10 +78,11 @@ const emailSchema = Joi.object({
 });
 
 const updateUserSchema = Joi.object().keys({
-  avatarURL: Joi.string().required(),
+  avatarURL: Joi.string(),
   name: Joi.string().required(),
-  birthday: Joi.string().pattern(birthdayRegexp).required(),
-  phone: Joi.string().pattern(phoneRegexp).required(),
+  email: Joi.string().pattern(emailRegexp).required(),
+  birthday: Joi.string().pattern(birthdayRegexp),
+  phone: Joi.string().pattern(phoneRegexp),
   skype: Joi.string(),
 });
 
