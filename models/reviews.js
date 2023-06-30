@@ -8,7 +8,7 @@ const reviewsSchema = new Schema({
     type: String,
     required: [true, 'Set your comment'],
   },
-  reting: {
+  rating: {
     type: Number,
     default: 0,
   },
@@ -25,7 +25,7 @@ const reviewsAddSchema = Joi.object({
   comment: Joi.string().required().messages({
     'any.required': `missing required comment field`,
   }),
-  reting: Joi.number().valid(0, 1, 2, 3, 4, 5),  
+  rating: Joi.number().valid(0, 1, 2, 3, 4, 5),  
 });
 
 const schemas = {
