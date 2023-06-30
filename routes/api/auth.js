@@ -1,6 +1,5 @@
 const express = require("express");
-const {
-  uploader,
+const { uploader
   // , cloudinary
 } = require("../../middlewares/index");
 const ctrl = require("../../controllers/auth");
@@ -19,24 +18,6 @@ router.post(
   "/verify",
   validateBody(schemas.emailSchema),
   ctrl.resendVerifyEmail
-);
-//google authorization
-router.get(
-  "/google",
-  passport.authenticate("google", {
-    scope: ["email", "profile"],
-  })
-);
-
-router.get(
-  "/google/callback",
-  passport.authenticate(
-    "google",
-    {
-      session: false,
-    },
-    ctrl.googleAuth
-  )
 );
 
 router.post("/login", validateBody(schemas.loginSchema), ctrl.login);
