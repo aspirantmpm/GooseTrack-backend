@@ -1,17 +1,18 @@
 const { User } = require("../../models/user");
 const { ctrlWrapper } = require("../../helpers");
+const { SECRET_KEY } = process.env;
 
 const googleAuth = async (req, res) => {
-  const user = await User.findOne({ email });
+  const { _id: id } = req.user;
 
   const payload = {
-    id: user._id,
+    id,
   };
 
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
-  await User.findByIdAndUpdate(user._id, { token });
+  await User.findByIdAndUpdate(id, { token });
 
-  res.redirect(`https://goosetrack-backend-2lsp.onrender.com?token=${token}`);
+  res.redirect(`https://markizdickabraz.github.io/GooseTeam/?token=${token}`);
 };
 
 module.exports = { googleAuth: ctrlWrapper(googleAuth) };
