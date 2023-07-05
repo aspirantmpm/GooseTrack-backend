@@ -75,7 +75,7 @@ const taskAddSchema = Joi.object({
   }),
   priority: Joi.string().required(),
   date: Joi.string().required(),
-  category: Joi.string().required(),
+  category: Joi.string().valid('to-do', 'in-progress', 'done').required(),
 });
 
 
