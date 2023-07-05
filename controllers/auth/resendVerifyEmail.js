@@ -13,8 +13,8 @@ const resendVerifyEmail = async (req, res) => {
   if (user.verify) {
     throw HttpError(400, "Verification has already been passed");
   }
-  const protocol = req.protocol; // Define the protocol (HTTP or HTTPS)
-  const host = req.get("host"); // get host
+  const protocol = req.protocol; 
+  const host = req.get("host"); 
   const fullUrl = `${protocol}://${host}`;
 
   const verificationToken = nanoid();

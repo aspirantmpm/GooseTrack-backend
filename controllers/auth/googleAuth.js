@@ -1,7 +1,10 @@
 const { User } = require("../../models/user");
 const { ctrlWrapper } = require("../../helpers");
+const jwt = require('jsonwebtoken');
+const { SECRET_KEY } = process.env;
 
 const googleAuth = async (req, res) => {
+    const { email } = req.body;
   const user = await User.findOne({ email });
 
   const payload = {

@@ -4,13 +4,12 @@ const { PROJECT_URL } = process.env;
 const { nanoid } = require("nanoid");
 const { User } = require("../../models/user");
 const { ctrlWrapper, HttpError, sendEmail } = require("../../helpers");
-// const { BASE_URL } = process.env;
 
 const register = async (req, res) => {
   const { email, password } = req.body;
 
-  const protocol = req.protocol; // Define the protocol (HTTP or HTTPS)
-  const host = req.get("host"); // get host
+  const protocol = req.protocol; 
+  const host = req.get("host"); 
   const fullUrl = `${protocol}://${host}`;
 
   const user = await User.findOne({ email });
