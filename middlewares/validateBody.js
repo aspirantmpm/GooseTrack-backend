@@ -8,7 +8,6 @@ const validateBody = (schema) => {
     if (file) fileName = { avatarURL: file.originalname };
 
     const validateData = { ...body, ...fileName };
-
     const { error } = schema.validate(file ? validateData : req.body);
     if (error) {
       next(HttpError(400, error.message));
