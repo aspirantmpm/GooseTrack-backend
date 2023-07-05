@@ -31,19 +31,14 @@ const userSchema = new Schema({
   },
   avatarURL: {
     type: String,
-    default: "",
-    // required: true,
+    default: "",    
   },
   phone: {
     type: String,
-    match: phoneRegexp,
-    // enum: ["starter", "pro", "business"],
-    // default: "starter",
+    match: phoneRegexp,    
   },
   skype: {
-    type: String,
-    // enum: ["starter", "pro", "business"],
-    // default: "starter",
+    type: String,    
   },
   token: {
     type: String,
