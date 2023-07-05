@@ -7,7 +7,7 @@ const ctrl = require("../../controllers/auth");
 
 const { schemas } = require("../../models/user");
 
-const { validateBody, authenticate } = require("../../middlewares");
+const { validateBody, authenticate, passport } = require("../../middlewares");
 
 const router = express.Router();
 
@@ -21,23 +21,23 @@ router.post(
   ctrl.resendVerifyEmail
 );
 // google authorization
-// router.get(
-//   "/google",
-//   passport.authenticate("google", {
-//     scope: ["email", "profile"],
-//   })
-// );
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["email", "profile"],
+  })
+);
 
-// router.get(
-//   "/google/callback",
-//   passport.authenticate(
-//     "google",
-//     {
-//       session: false,
-//     },
-//     ctrl.googleAuth
-//   )
-// );
+router.get(
+  "/google/callback",
+  passport.authenticate(
+    "google",
+    {
+      session: false,
+    },
+    ctrl.googleAuth
+  )
+);
 
 router.post("/login", validateBody(schemas.loginSchema), ctrl.login);
 
