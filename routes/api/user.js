@@ -1,5 +1,3 @@
-// router.post("/jwtrefresh", authenticate, ctrl.refreshToken);
-
 const express = require('express');
 const router = express.Router();
 

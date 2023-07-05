@@ -11,11 +11,6 @@ router.post('/', authenticate, validateBody(schemas.taskAddSchema), ctrl.postTas
 
 router.get('/:_id', authenticate, isValidId, ctrl.getTaskPerMonth);
 
-
-// router.get('/:_id', authenticate, isValidId, ctrl.getTaskPerMonth);
-
-// router.post('/', authenticate, validateBody(schemas.taskAddSchema), ctrl.addTask);
-
 router.delete('/:_id', authenticate, isValidId, ctrl.deleteById);
 
 router.patch(
