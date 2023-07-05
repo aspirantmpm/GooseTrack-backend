@@ -1,7 +1,5 @@
 const { Reviews } = require('../../models/reviews');
-const {
-  // HttpError,
-  ctrlWrapper } = require('../../helpers');
+const { ctrlWrapper } = require('../../helpers');
 
 const getAllOwn = async (req, res) => {
   const { _id: owner } = req.user;
